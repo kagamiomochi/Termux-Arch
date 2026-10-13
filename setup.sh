@@ -32,11 +32,11 @@ proot-distro login archlinux -- bash -eu -c '
   user_name="${1}"
   password="${2}"
 
+  pacman -Syu --noconfirm --needed sudo nano
+  
   if ! id -u "${user_name}" >/dev/null 2>&1; then
     useradd -m -s /bin/bash "${user_name}"
   fi
-
-  pacman -Syu --noconfirm --needed sudo nano
 
   printf "%s:%s\n" "${user_name}" "${password}" | chpasswd
 
