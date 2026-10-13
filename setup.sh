@@ -24,9 +24,7 @@ pkg install -y x11-repo
 pkg install -y termux-x11-nightly
 pkg install -y proot-distro
 
-if ! proot-distro list 2>/dev/null | grep -q '^archlinux$'; then
-  proot-distro install heywoodlh/archlinux --override-alias archlinux
-fi
+proot-distro install heywoodlh/archlinux --override-alias archlinux
 
 proot-distro login archlinux -- bash -eu -c '
   user_name="${1}"
