@@ -6,13 +6,13 @@ if ! command -v pkg >/dev/null 2>&1; then
   exit 1
 fi
 
-read -r -p "UserName: " user_name
+read -r -p "UserName: " user_name < /dev/tty
 if [[ ! "$user_name" =~ ^[a-z_][a-z0-9_-]*$ ]]; then
   echo "Invalid username. Use lowercase letters, numbers, underscores, or dashes." >&2
   exit 1
 fi
 
-IFS= read -r -s -p "Password: " password
+IFS= read -r -s -p "Password: " password < /dev/tty
 echo
 
 touch ~/.hushlogin
