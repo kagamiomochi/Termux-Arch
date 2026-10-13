@@ -1,7 +1,7 @@
 #!/bin/bash
 set -Eeuo pipefail
 
-if ! command -v pkg >/dev/null 2>&1; then
+if ! command -v termux-info >/dev/null 2>&1; then
   echo "This script must be run in Termux." >&2
   exit 1
 fi
@@ -18,12 +18,14 @@ echo
 touch ~/.hushlogin
 
 pkg update -y
-apt -o Dpkg::Options::="--force-confold" upgrade -y || true
+apt -o Dpkg::Options::="--force-confold" upgrade -y
 
-pkg install -y x11-repo termux-x11-nightly proot-distro || exit 1
+pkg install -y x11-repo
+pkg install -y termux-x11-nightly
+pkg install -y proot-distro
 
 if ! proot-distro list 2>/dev/null | grep -q '^archlinux$'; then
-  proot-distro install heywoodlh/archlinux --override-alias archlinux || exit 1
+  proot-distro install heywoodlh/archlinux --override-alias archlinux
 fi
 
 proot-distro login archlinux -- bash -eu -c '
